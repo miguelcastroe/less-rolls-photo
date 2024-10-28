@@ -44,30 +44,32 @@ function applyFilmRollPreset() {
 // Apply preset and grain when film roll changes
 filmRoll.addEventListener('change', applyFilmRollPreset);
 
-// Handle image upload
+// Handle image upload and dynamically set dimensions to fit container
 uploadImage.addEventListener('change', (event) => {
     const file = event.target.files[0];
     if (file) {
         const reader = new FileReader();
         reader.onload = function(e) {
             previewImage.src = e.target.result;
-            previewImage.onload = adjustPreviewSize; // Adjust size after loading
+            previewImage.onload = () => adjustImageDimensions(); // Adjust size after loading
         };
         reader.readAsDataURL(file);
     }
     applyFilmRollPreset(); // Apply the selected film roll preset on upload
 });
 
-// Adjust preview size based on container
-function adjustPreviewSize() {
+// Adjust image dimensions to fit 720px container width while maintaining aspect ratio
+function adjustImageDimensions() {
+    const containerWidth = 720;
     const aspectRatio = previewImage.naturalWidth / previewImage.naturalHeight;
-
-    if (aspectRatio > 1) { // Landscape orientation
-        previewImage.style.width = '100%';
+    if (aspectRatio > 1) {
+        // Landscape: Full width, calculate height
+        previewImage.style.width = `${containerWidth}px`;
+        previewImage.style.height = `${containerWidth / aspectRatio}px`;
+    } else {
+        // Portrait: Full width based on 720px width
+        previewImage.style.width = `${containerWidth}px`;
         previewImage.style.height = 'auto';
-    } else { // Portrait orientation
-        previewImage.style.width = 'auto';
-        previewImage.style.height = '100%';
     }
 }
 
