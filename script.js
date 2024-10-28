@@ -1,65 +1,46 @@
 const filmRoll = document.getElementById('filmRoll');
 const grainType = document.getElementById('grainType');
-const contrast = document.getElementById('contrast');
-const exposure = document.getElementById('exposure');
-const tint = document.getElementById('tint');
 const previewImage = document.getElementById('previewImage');
 const grainOverlay = document.getElementById('grainOverlay');
 const exportButton = document.getElementById('exportButton');
 const uploadImage = document.getElementById('uploadImage');
 const exportFormat = document.getElementById('exportFormat');
 
-// Update the preview image based on user inputs
-function updatePreview() {
-    let contrastValue = contrast.value / 100 + 1;
-    let brightnessValue = parseInt(exposure.value) + 100;
-    let tintValue = tint.value / 100;
-
-    // Apply custom filters based on the selected film roll
+// Automatically apply film roll presets
+function applyFilmRollPreset() {
+    let filter = '';
     switch (filmRoll.value) {
         case 'hp5':
-            contrastValue *= 1.1;
-            tintValue += 0.05;
+            filter = 'contrast(1.2) brightness(1.05) grayscale(1)';
             break;
         case 'tri-x':
-            contrastValue *= 1.2;
-            brightnessValue -= 10;
+            filter = 'contrast(1.3) brightness(0.9) sepia(0.2)';
             break;
         case 'neopan':
-            contrastValue *= 1.05;
+            filter = 'contrast(1.1) brightness(1) grayscale(1)';
             break;
         case 'delta':
-            brightnessValue += 20;
-            contrastValue *= 1.3;
+            filter = 'contrast(1.4) brightness(1.1) sepia(0.1)';
             break;
         case 'apx':
-            contrastValue *= 0.95;
-            brightnessValue += 10;
+            filter = 'contrast(1) brightness(1.2) grayscale(1)';
             break;
         case 'rollei':
-            contrastValue *= 1.15;
-            tintValue -= 0.1;
+            filter = 'contrast(1.25) brightness(0.95) sepia(0.15)';
             break;
     }
-
-    previewImage.style.filter = `
-        contrast(${contrastValue})
-        brightness(${brightnessValue}%)
-        sepia(${tintValue})
-    `;
+    previewImage.style.filter = filter;
 }
 
-// Grain overlay handling
+// Apply grain overlay
 function updateGrain() {
     grainOverlay.className = `grain ${grainType.value}`;
 }
 
-contrast.addEventListener('input', updatePreview);
-exposure.addEventListener('input', updatePreview);
-tint.addEventListener('input', updatePreview);
-filmRoll.addEventListener('change', updatePreview);
+filmRoll.addEventListener('change', applyFilmRollPreset);
 grainType.addEventListener('change', updateGrain);
 
+// Handle image upload
 uploadImage.addEventListener('change', (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -69,8 +50,12 @@ uploadImage.addEventListener('change', (event) => {
         };
         reader.readAsDataURL(file);
     }
+    // Apply default preset when a new image is uploaded
+    applyFilmRollPreset();
+    updateGrain();
 });
 
+// Export function
 exportButton.addEventListener('click', () => exportImage());
 
 function exportImage() {
@@ -85,12 +70,15 @@ function exportImage() {
     img.onload = () => {
         ctx.filter = previewImage.style.filter;
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        // Set format based on user selection
+        const format = exportFormat.value;
+        const mimeType = `image/${format}`;
         
-        // Set format
-        const mimeType = `image/${exportFormat.value}`;
+        // Create a download link for the exported image
         const link = document.createElement('a');
         link.href = canvas.toDataURL(mimeType);
-        link.download = `emulated_photo.${exportFormat.value}`;
+        link.download = `emulated_photo.${format}`;
         link.click();
     };
 }
