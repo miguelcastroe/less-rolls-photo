@@ -51,11 +51,25 @@ uploadImage.addEventListener('change', (event) => {
         const reader = new FileReader();
         reader.onload = function(e) {
             previewImage.src = e.target.result;
+            previewImage.onload = adjustPreviewSize; // Adjust size after loading
         };
         reader.readAsDataURL(file);
     }
     applyFilmRollPreset(); // Apply the selected film roll preset on upload
 });
+
+// Adjust preview size based on container
+function adjustPreviewSize() {
+    const container = document.querySelector('.image-container');
+    const aspectRatio = previewImage.naturalWidth / previewImage.naturalHeight;
+    if (aspectRatio > 1) { // Landscape orientation
+        previewImage.style.width = '100%';
+        previewImage.style.height = 'auto';
+    } else { // Portrait orientation
+        previewImage.style.width = 'auto';
+        previewImage.style.height = '100%';
+    }
+}
 
 // Export function
 exportButton.addEventListener('click', () => exportImage());
