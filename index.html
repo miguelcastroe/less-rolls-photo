@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Film Photography Emulator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Film Photography Emulator (B&W)</h1>
+    <div class="controls">
+        <label>Film Roll:
+            <select id="filmRoll">
+                <option>Ilford HP5</option>
+                <option>Kodak Tri-X</option>
+                <option>Fuji Neopan 100</option>
+                <option>Ilford Delta 3200</option>
+                <option>Agfa APX 25</option>
+                <option>Rollei Retro 400</option>
+            </select>
+        </label>
+        <label>Grain:
+            <select id="grainType">
+                <option>Fine</option>
+                <option>Medium</option>
+                <option>High</option>
+            </select>
+        </label>
+        <label>Contrast: <input type="range" id="contrast" min="0" max="100"></label>
+        <label>Exposure: <input type="range" id="exposure" min="-100" max="100"></label>
+        <label>Tint: <input type="range" id="tint" min="-50" max="50"></label>
+    </div>
+    <div class="preview">
+        <img id="previewImage" src="default.jpg" alt="Preview">
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
