@@ -48,7 +48,7 @@ label {
     flex-direction: column;
 }
 
-select, input[type="range"], input[type="file"] {
+select, input[type="file"] {
     font-family: 'Geist Mono', monospace;
     font-weight: 400;
     padding: 8px;
@@ -59,7 +59,7 @@ select, input[type="range"], input[type="file"] {
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-select:focus, input[type="range"]:focus, input[type="file"]:focus {
+select:focus, input[type="file"]:focus {
     border-color: #0070f3;
     box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.2);
 }
@@ -98,15 +98,15 @@ select:focus, input[type="range"]:focus, input[type="file"]:focus {
 }
 
 .grain.fine {
-    background-image: url('fine-grain.png'); /* Replace with actual grain texture */
+    background-image: url('fine-grain.png'); /* Add fine grain texture */
 }
 
 .grain.medium {
-    background-image: url('medium-grain.png'); /* Replace with actual grain texture */
+    background-image: url('medium-grain.png'); /* Add medium grain texture */
 }
 
 .grain.high {
-    background-image: url('high-grain.png'); /* Replace with actual grain texture */
+    background-image: url('high-grain.png'); /* Add high grain texture */
 }
 
 .export-controls {
