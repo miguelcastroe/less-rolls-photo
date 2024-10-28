@@ -58,14 +58,15 @@ select:focus, input[type="file"]:focus {
     box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.2);
 }
 
+/* Set fixed width for preview container */
 .preview {
+    width: 720px;
+    max-width: 100%;
     border-radius: 10px;
     overflow: hidden;
     background: #eaeaea;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 10px;
-    width: 100%;
-    max-width: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -73,16 +74,15 @@ select:focus, input[type="file"]:focus {
 }
 
 .image-container {
-    position: relative;
-    display: flex;
     width: 100%;
-    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 .preview img {
-    max-width: 100%;
-    max-height: 400px; /* Keeps image from exceeding container height */
-    width: auto;
+    width: 100%;
     height: auto;
     border-radius: 8px;
     transition: filter 0.2s;
