@@ -1,44 +1,48 @@
 const filmRoll = document.getElementById('filmRoll');
-const grainType = document.getElementById('grainType');
 const previewImage = document.getElementById('previewImage');
 const grainOverlay = document.getElementById('grainOverlay');
 const exportButton = document.getElementById('exportButton');
 const uploadImage = document.getElementById('uploadImage');
 const exportFormat = document.getElementById('exportFormat');
 
-// Automatically apply film roll presets
+// Automatically apply black-and-white filter and grain based on film roll selection
 function applyFilmRollPreset() {
-    let filter = '';
+    let filter = 'grayscale(1)'; // Ensures all images are black-and-white
+    let grainClass = 'none';
+
     switch (filmRoll.value) {
         case 'hp5':
-            filter = 'contrast(1.2) brightness(1.05) grayscale(1)';
+            filter += ' contrast(1.2) brightness(1.05)';
+            grainClass = 'medium';
             break;
         case 'tri-x':
-            filter = 'contrast(1.3) brightness(0.9) sepia(0.2)';
+            filter += ' contrast(1.3) brightness(0.9)';
+            grainClass = 'high';
             break;
         case 'neopan':
-            filter = 'contrast(1.1) brightness(1) grayscale(1)';
+            filter += ' contrast(1.1)';
+            grainClass = 'fine';
             break;
         case 'delta':
-            filter = 'contrast(1.4) brightness(1.1) sepia(0.1)';
+            filter += ' contrast(1.4) brightness(1.1)';
+            grainClass = 'high';
             break;
         case 'apx':
-            filter = 'contrast(1) brightness(1.2) grayscale(1)';
+            filter += ' contrast(1) brightness(1.2)';
+            grainClass = 'fine';
             break;
         case 'rollei':
-            filter = 'contrast(1.25) brightness(0.95) sepia(0.15)';
+            filter += ' contrast(1.25) brightness(0.95)';
+            grainClass = 'medium';
             break;
     }
+
     previewImage.style.filter = filter;
+    grainOverlay.className = `grain ${grainClass}`;
 }
 
-// Apply grain overlay
-function updateGrain() {
-    grainOverlay.className = `grain ${grainType.value}`;
-}
-
+// Apply preset and grain when film roll changes
 filmRoll.addEventListener('change', applyFilmRollPreset);
-grainType.addEventListener('change', updateGrain);
 
 // Handle image upload
 uploadImage.addEventListener('change', (event) => {
@@ -50,9 +54,7 @@ uploadImage.addEventListener('change', (event) => {
         };
         reader.readAsDataURL(file);
     }
-    // Apply default preset when a new image is uploaded
-    applyFilmRollPreset();
-    updateGrain();
+    applyFilmRollPreset(); // Apply the selected film roll preset on upload
 });
 
 // Export function
@@ -71,11 +73,9 @@ function exportImage() {
         ctx.filter = previewImage.style.filter;
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-        // Set format based on user selection
         const format = exportFormat.value;
         const mimeType = `image/${format}`;
         
-        // Create a download link for the exported image
         const link = document.createElement('a');
         link.href = canvas.toDataURL(mimeType);
         link.download = `emulated_photo.${format}`;
