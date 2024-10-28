@@ -11,19 +11,20 @@
     <div class="controls">
         <label>Film Roll:
             <select id="filmRoll">
-                <option>Ilford HP5</option>
-                <option>Kodak Tri-X</option>
-                <option>Fuji Neopan 100</option>
-                <option>Ilford Delta 3200</option>
-                <option>Agfa APX 25</option>
-                <option>Rollei Retro 400</option>
+                <option value="hp5">Ilford HP5</option>
+                <option value="tri-x">Kodak Tri-X</option>
+                <option value="neopan">Fuji Neopan 100</option>
+                <option value="delta">Ilford Delta 3200</option>
+                <option value="apx">Agfa APX 25</option>
+                <option value="rollei">Rollei Retro 400</option>
             </select>
         </label>
         <label>Grain:
             <select id="grainType">
-                <option>Fine</option>
-                <option>Medium</option>
-                <option>High</option>
+                <option value="none">None</option>
+                <option value="fine">Fine</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
             </select>
         </label>
         <label>Contrast: <input type="range" id="contrast" min="0" max="100" value="50"></label>
@@ -33,7 +34,10 @@
 
     <div class="preview">
         <input type="file" id="uploadImage" accept="image/*">
-        <img id="previewImage" src="default.jpg" alt="Preview">
+        <div class="image-container">
+            <img id="previewImage" src="default.jpg" alt="Preview">
+            <div id="grainOverlay" class="grain"></div>
+        </div>
     </div>
 
     <div class="export-controls">
