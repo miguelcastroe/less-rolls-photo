@@ -60,8 +60,8 @@ uploadImage.addEventListener('change', (event) => {
 
 // Adjust preview size based on container
 function adjustPreviewSize() {
-    const container = document.querySelector('.image-container');
     const aspectRatio = previewImage.naturalWidth / previewImage.naturalHeight;
+
     if (aspectRatio > 1) { // Landscape orientation
         previewImage.style.width = '100%';
         previewImage.style.height = 'auto';
