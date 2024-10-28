@@ -115,7 +115,7 @@ input[type="range"]:hover {
     transition: filter 0.2s;
 }
 
-/* Button styling (if you decide to add buttons) */
+/* Button styling */
 button {
     font-family: 'Geist Mono', monospace;
     font-weight: 400;
