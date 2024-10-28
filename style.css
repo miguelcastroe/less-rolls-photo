@@ -1,33 +1,48 @@
-.export-controls {
-    margin-top: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:ital,wght@0,300;0,400&display=swap');
+
+* {
+    box-sizing: border-box;
+    font-family: 'Geist Mono', monospace;
+    margin: 0;
+    padding: 0;
 }
 
-.export-controls label {
+body {
+    font-family: 'Geist Mono', monospace;
+    font-weight: 300;
+    color: #111;
+    background-color: #fafafa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+h1 {
+    font-weight: 400;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+    text-align: center;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+label {
     font-weight: 300;
     color: #555;
-}
-
-button {
-    font-family: 'Geist Mono', monospace;
-    font-weight: 400;
-    background-color: #0070f3;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.2s, box-shadow 0.2s;
-}
-
-button:hover {
-    background-color: #005bb5;
-    box-shadow: 0 2px 8px rgba(0, 112, 243, 0.3);
-}
-
-button:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.4);
-}
+    display: flex;
+   
