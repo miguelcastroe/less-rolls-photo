@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Film Photography Emulator (B&W)</h1>
+    <h1>Less | Film Photography Emulator (B&W)</h1>
     <div class="controls">
         <label>Film Roll:
             <select id="filmRoll">
@@ -26,13 +26,14 @@
                 <option>High</option>
             </select>
         </label>
-        <label>Contrast: <input type="range" id="contrast" min="0" max="100"></label>
-        <label>Exposure: <input type="range" id="exposure" min="-100" max="100"></label>
-        <label>Tint: <input type="range" id="tint" min="-50" max="50"></label>
+        <label>Contrast: <input type="range" id="contrast" min="0" max="100" value="50"></label>
+        <label>Exposure: <input type="range" id="exposure" min="-100" max="100" value="0"></label>
+        <label>Tint: <input type="range" id="tint" min="-50" max="50" value="0"></label>
     </div>
     <div class="preview">
         <img id="previewImage" src="default.jpg" alt="Preview">
     </div>
+    <button id="exportButton">Export Image</button>
     <script src="script.js"></script>
 </body>
 </html>
