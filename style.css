@@ -73,16 +73,23 @@ select:focus, input[type="file"]:focus {
     width: 100%;
     max-width: 400px;
     text-align: center;
+    position: relative;
 }
 
 .image-container {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
+    height: auto;
 }
 
 .preview img {
     max-width: 100%;
-    display: block;
+    max-height: 400px; /* Limits the image preview height */
+    width: auto;
+    height: auto;
     border-radius: 8px;
     transition: filter 0.2s;
 }
@@ -98,15 +105,15 @@ select:focus, input[type="file"]:focus {
 }
 
 .grain.fine {
-    background-image: url('fine-grain.png'); /* Add fine grain texture */
+    background-image: url('fine-grain.png'); /* Fine grain texture */
 }
 
 .grain.medium {
-    background-image: url('medium-grain.png'); /* Add medium grain texture */
+    background-image: url('medium-grain.png'); /* Medium grain texture */
 }
 
 .grain.high {
-    background-image: url('high-grain.png'); /* Add high grain texture */
+    background-image: url('high-grain.png'); /* High grain texture */
 }
 
 .export-controls {
